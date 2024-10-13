@@ -7,7 +7,7 @@ function App() {
       <header className="App-header">
 
         <p>
-        DevOps  Jenkins  React
+         React for DevOps
         </p>
 
       </header>
