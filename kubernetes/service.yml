@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: devops-004-pipeline-aws
+  labels:
+    app: devops-004-pipeline-aws
+    team: frontend  
+spec:
+  type: LoadBalancer
+  selector:
+    app: devops-004-pipeline-aws
+  ports:
+  - port: 80
+    targetPort: 3000

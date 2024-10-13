@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: devops-004-pipeline-aws
+  labels:
+    app: devops-004-pipeline-aws
+    team: frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: devops-004-pipeline-aws
+  template:
+    metadata:
+      labels:
+        app: devops-004-pipeline-aws
+    spec:
+      terminationGracePeriodSeconds: 30
+      containers:
+      - name: devops-004-pipeline-aws
+        image: mimaraslan/devops-004-pipeline-aws:latest
+        imagePullPolicy: "Always"
+        resources:
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 3000
