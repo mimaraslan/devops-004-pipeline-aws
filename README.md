@@ -1,4 +1,4 @@
-# Frontend React App for DevOps
+# Frontend React Application for DevOps
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
