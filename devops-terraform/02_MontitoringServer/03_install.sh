@@ -3,9 +3,9 @@ sudo apt update -y
 
 ##Install Prometheus and Create Service for Prometheus
 sudo useradd --system --no-create-home --shell /bin/false prometheus
-wget https://github.com/prometheus/prometheus/releases/download/v2.47.1/prometheus-2.47.1.linux-amd64.tar.gz
-tar -xvf prometheus-2.47.1.linux-amd64.tar.gz
-cd prometheus-2.47.1.linux-amd64/
+wget https://github.com/prometheus/prometheus/releases/download/v2.54.1/prometheus-2.54.1.linux-amd64.tar.gz
+tar -xvf prometheus-2.54.1.linux-amd64.tar.gz
+cd prometheus-2.54.1.linux-amd64/
 sudo mkdir -p /data /etc/prometheus
 sudo mv prometheus promtool /usr/local/bin/
 sudo mv consoles/ console_libraries/ /etc/prometheus/
@@ -44,9 +44,9 @@ sudo systemctl start prometheus
 
 ##Install Node Exporter and Create Service for Node Exporter
 sudo useradd --system --no-create-home --shell /bin/false node_exporter
-wget https://github.com/prometheus/node_exporter/releases/download/v1.6.1/node_exporter-1.6.1.linux-amd64.tar.gz
-tar -xvf node_exporter-1.6.1.linux-amd64.tar.gz
-sudo mv node_exporter-1.6.1.linux-amd64/node_exporter /usr/local/bin/
+wget https://github.com/prometheus/node_exporter/releases/download/v1.8.2/node_exporter-1.8.2.linux-amd64.tar.gz
+tar -xvf node_exporter-1.8.2.linux-amd64.tar.gz
+sudo mv node_exporter-1.8.2.linux-amd64/node_exporter /usr/local/bin/
 rm -rf node_exporter*
 sudo cat > /etc/systemd/system/node_exporter.service << EOF
 [Unit]

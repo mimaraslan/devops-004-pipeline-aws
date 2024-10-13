@@ -1,12 +1,12 @@
 resource "aws_instance" "web" {
-  ami                    = "ami-0866a3c8686eaeeba"      #change ami id for different region
-  instance_type          = "t2.xlarge"
-  key_name               = "My-Key-Pair-2024"              #change key name as per your setup
-  vpc_security_group_ids = [aws_security_group.Monitoring-Server-SG.id]
-  user_data              = templatefile("./03_install.sh", {})
+  ami                    = "ami-0866a3c8686eaeeba"   
+  instance_type          = "t2.large"               
+  key_name               = "My-Key-Pair-2024"        
+  vpc_security_group_ids = [aws_security_group.My-Monitoring-Server-SG.id]
+  user_data              = templatefile("./03_install.sh", {}) 
 
   tags = {
-    Name = "Monitoring-Server"
+    Name = "My-Monitoring-Server" 
   }
 
   root_block_device {
@@ -18,10 +18,8 @@ resource "aws_instance" "web" {
 
 
 
-
-
-resource "aws_security_group" "Monitoring-Server-SG" {
-  name        = "Monitoring-Server-SG"
+resource "aws_security_group" "My-Monitoring-Server-SG" {
+  name        = "My-Monitoring-Server-SG" #
   description = "Allow TLS inbound traffic"
 
   ingress = [
@@ -46,14 +44,16 @@ resource "aws_security_group" "Monitoring-Server-SG" {
   }
 
   tags = {
-    Name = "Monitoring-Server-SG"
+    Name = "My-Monitoring-Server-SG"
   }
 
 }
 
 
 
-resource "aws_budgets_budget" "abone-ec2" {
+
+
+resource "aws_budgets_budget" "budget-ec2" {
   name              = "my-monthly-budget"
   budget_type       = "COST"
   limit_amount      = "80"

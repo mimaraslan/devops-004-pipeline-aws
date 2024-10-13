@@ -24,3 +24,14 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+
+
+.terraform.lock.hcl
+/.terraform.lock.hcl
+
+.terraform
+/.terraform
+
+/terraform.tfstate
+
