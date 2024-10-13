@@ -35,3 +35,4 @@ yarn-error.log*
 
 /terraform.tfstate
 
+devops-terraform/02_MontitoringServer/terraform.tfstate
