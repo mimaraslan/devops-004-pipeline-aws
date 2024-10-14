@@ -1,0 +1,185 @@
+My-Jenkins-Server
+Public IPv4 address
+Private IPv4 addresses
+
+
+
+
+
+SonarTokenForJenkins
+squ_YOUR_SONARQUBE_TOKEN
+
+Analyze "devops-004-pipeline-aws"
+
+sonar-scanner \
+  -Dsonar.projectKey=devops-004-pipeline-aws \
+  -Dsonar.sources=. \
+  -Dsonar.host.url=http://54.156.17.166:9000 \
+  -Dsonar.login=squ_YOUR_SONARQUBE_TOKEN
+  
+  
+MyDockerHubToken
+docker login -u YOUR_USERNAME -p dckr_YOUR_DOCKERHUB_TOKEN
+
+
+
+My-Monitoring-Server
+
+Public IPv4 address
+MONITORING_SERVER_PUBLIC_IP
+
+
+Private IPv4 addresses
+MONITORING_SERVER_PRIVATE_IP
+
+
+
+cd /etc/prometheus
+
+ls
+
+sudo nano prometheus.yml
+
+
+  - job_name: 'node_exporter'
+    static_configs:
+      - targets: ['MONITORING_SERVER_PUBLIC_IP:9100']
+
+
+
+promtool check config /etc/prometheus/prometheus.yml
+
+curl -X POST http://localhost:9090/-/reload
+
+
+
+
+JENKINS_SERVER_PUBLIC_IP
+54.156.17.166
+
+
+  - job_name: 'jenkins'
+    metrics_path: '/prometheus'
+    static_configs:
+      - targets: ['54.156.17.166:8080']
+
+
+
+
+Jenkins üzerinden EMAIL attırma  App passwords gmail
+YOUR_MAIL_ID@gmail.com
+GMAIL_TOKEN
+
+
+
+
+#eks
+sudo apt update
+sudo apt upgrade -y	
+sudo reboot
+
+
+
+sudo apt install curl
+curl -LO https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+kubectl version --client
+
+
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+sudo apt install unzip
+unzip awscliv2.zip
+sudo ./aws/install
+aws --version
+
+
+curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+cd /tmp
+sudo mv /tmp/eksctl /bin
+eksctl version
+
+
+
+
+EC2 JENKINS_SERVER makineye ADMIN ROLUNU VER
+
+
+
+eksctl create cluster --name my-workspace-cluster \
+--region us-east-1 \
+--node-type t2.large \
+--nodes 3 
+
+
+kubectl config view
+
+
+kubectl get service
+
+kubectl get svc
+
+kubectl get svc --all-namespaces
+
+
+kubectl get nodes -o wide
+
+kubectl get pods -o wide
+
+
+
+
+
+
+
+
+
+# Helm
+
+sudo snap install helm --classic    
+helm version
+                    
+OR
+
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+chmod 700 get_helm.sh
+./get_helm.sh
+helm version
+
+
+helm repo add stable https://charts.helm.sh/stable
+          
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts     
+
+kubectl create namespace prometheus            
+
+helm install stable prometheus-community/kube-prometheus-stack -n prometheus      
+
+kubectl get pods -n prometheus          
+
+
+
+kubectl edit svc stable-kube-prometheus-sta-prometheus -n prometheus    
+
+
+kubectl get svc -n prometheus    
+
+
+
+
+kubectl delete deployment.apps/my-workspace-cluster     
+kubectl delete service/my-workspace-service             
+
+kubectl delete --all pods -n prometheus                  
+kubectl delete namespace prometheus
+
+
+// EKS nodelarını silme komutları
+
+export AWS_DEFAULT_REGION=us-east-1
+eksctl delete cluster   --name my-workspace-cluster
+
+// eksctl delete cluster --region=us-east-1 --name=my-workspace-cluster      
+
+
+terraform destroy
+
